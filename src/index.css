@@ -1,13 +1,226 @@
-body {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+:root {
+  --white: rgb(240, 240, 240);
+  --black: rgb(10, 10, 10);
+  --red: rgb(192, 62, 62);
+  --green: rgb(12, 134, 28);
+  --blue-dark: rgb(31, 73, 172);
+  --blue--gradient: linear-gradient(rgb(56, 97, 192), rgb(31, 73, 172));
+  --white--gradient: linear-gradient(rgb(235, 235, 235), rgb(216, 216, 216));
+  --dark--gradient: linear-gradient(rgb(40, 44, 52), rgb(29, 32, 39));
+  --app--with: 40em;
+}
+/* Root Elements */
+html,
+body {
+  min-height: 100%;
+}
+body {
+  background: var(--dark--gradient);
+  margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: var(--black);
+  line-height: 1.5;
+  font-size: 1rem;
+}
+#root {
+  max-width: var(--app--with);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 auto;
+}
+main {
+  padding: 1em;
+  margin: 1em 2em;
+  border-radius: 1em;
+  background: var(--white--gradient);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+}
+menu {
+  margin: 0;
+  padding: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 9000;
+}
+menu button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  background: var(--blue--gradient);
+  border-radius: 100vh;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--white);
+  padding: 0;
+  top: 2em;
+  right: 0.4em;
+  height: 2.5em;
+  width: 2.5em;
+}
+menu button:hover {
+  color: var(--white);
+  background: var(--blue-dark);
+  border: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Global */
+.green {
+  color: var(--green);
+}
+a {
+  color: var(--black);
+}
+a:hover {
+  color: var(--red);
+}
+button {
+  display: inline-block;
+  background: none;
+  color: var(--white);
+  border: 1px solid var(--white);
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.5em;
+  font-weight: normal;
+}
+button:hover {
+  cursor: pointer;
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+h1,
+h2 {
+  text-align: center;
+}
+h1 {
+  font-size: 2rem;
+}
+.title p {
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+/* List styling */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  margin: 0;
+  padding: 0;
+}
+li + li {
+  padding: 0.25em 0;
+  margin: 0;
+}
+
+.list--item {
+  border-bottom: 1px solid rgb(200, 200, 200);
+  box-shadow: 0 1px var(--white);
+}
+.list--item:last-child {
+  border: none;
+  box-shadow: none;
+}
+.list--item button {
+  border: none;
+  color: rgba(26, 26, 26, 0.7);
+  padding: 0.5em;
+  font-size: 1rem;
+  margin-left: 0.5em;
+}
+.list--item p > i {
+  margin-right: 0.5em;
+}
+.list--item input {
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  color: var(--black);
+}
+.list--item input:focus {
+  border: 1px solid var(--black);
+}
+
+.list--item--name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list--item--name p {
+  overflow-wrap: anywhere;
+}
+.list--item--name p,
+.list--item--name input {
+  font-size: 1.25rem;
+  font-weight: normal;
+  flex: 1 1 auto;
+}
+.list--item--name p:hover,
+.list--item button:hover {
+  cursor: pointer;
+  color: var(--red);
+}
+.subtask {
+  margin: 0 1em;
+}
+
+/* Progression bar */
+.progression--wrapper {
+  margin-top: 0.5em;
+  font-size: 0.75rem;
+  text-align: center;
+}
+.progression {
+  height: 0.5em;
+  border-radius: 100vh;
+  border: 1px solid rgb(138, 138, 138);
+  box-shadow: 1px 1px var(--white);
+  margin-bottom: 0.5em;
+}
+.progression .bar {
+  height: 100%;
+  background-color: var(--red);
+  border-radius: 100vh;
+  box-shadow: inset 1px 1px rgb(61, 7, 7);
+}
+
+/* Completed task */
+.complete p {
+  text-decoration: line-through;
+}
+
+/* Styling for adding new tasks */
+.add--task button {
+  font-size: 1.5em;
+  padding: 0.25em;
+  margin: 0 0 0 0.25em;
+}
+.add--task button:hover {
+  color: var(--red);
+}
+.add--task button:last-child:hover {
+  color: var(--green);
+}
+
+.clear--btn {
+  display: block;
+  margin: 5em auto;
+  max-width: 20em;
 }
